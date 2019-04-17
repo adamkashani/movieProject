@@ -37,7 +37,6 @@ export class MoviesComponent implements OnInit {
       // להחליף לפופאפ
       alert('no validate')
     }
-    
   }
   
   openUpdate(movie: Movie) {
@@ -58,10 +57,8 @@ export class MoviesComponent implements OnInit {
   }
 
   openRemove(movie: Movie) {
-
     this.ngxSmartModalService.setModalData(movie, 'delete', true);
     this.ngxSmartModalService.getModal('delete').open();
-
   }
 
   sendRemove() {
@@ -69,9 +66,6 @@ export class MoviesComponent implements OnInit {
     this.movieService.removeMovie(movie);
     this.ngxSmartModalService.getModal('delete').close();
   }
-
-
-
 
 
 

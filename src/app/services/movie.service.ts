@@ -22,6 +22,7 @@ export class MovieService {
           this.autoIncrement++;
           next.Title = this.fixTitle(next.Title);
           this.movies.push(next);
+          // this.titleToSplit(next.Title);
         },
         (error) => console.log(error)
       )
@@ -80,8 +81,11 @@ export class MovieService {
 
   // לא בטוח שצריך את המתודה הזאת
   titleToSplit(title :string){
-    console.log(title.indexOf('"Title":"'))
-    title.substring(title.indexOf('"Title":"') , title.indexOf('"Title":"') )
+    // let endOfTitle : number  = title.search(/\d/);
+    let endOfTitle : number  = title.search('dated');
+    let test = title.substring(0 , endOfTitle);
+    console.log(test)
+
   }
 
 
