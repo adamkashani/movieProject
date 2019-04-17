@@ -12,19 +12,19 @@ import { ValidateService } from 'src/app/services/validate.service';
 export class MoviesComponent implements OnInit {
 
   movie: Movie = null;
-  // tslint:disable-next-line: max-line-length
-  constructor(private validateService: ValidateService, private movieService: MovieService, public ngxSmartModalService: NgxSmartModalService) { }
+
+  constructor(private validateService: ValidateService,
+    private movieService: MovieService,
+    public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
 
-  add() {
+  openCreate() {
     this.ngxSmartModalService.getModal('create').open();
   }
 
-
-  checkAndCreate(title: string, year: string, runTime: string, genre: string, director: string) {
-    //this.validateService.validateRumTime(id)&&
+  sendCreate(title: string, year: string, runTime: string, genre: string, director: string) {
     title = this.movieService.fixTitle(title);
     let movie = new Movie(this.movieService.autoIncrement.toString(), title, year, runTime, genre, director)
     if (this.validateService.validateToCreate(movie)) {
@@ -33,37 +33,37 @@ export class MoviesComponent implements OnInit {
       this.ngxSmartModalService.getModal('create').close();
       return;
     } else {
+      // להחליף לפופאפ
       alert('no validate')
     }
-
+    
   }
-
-
-  updateMovie(movie: Movie) {
+  
+  openUpdate(movie: Movie) {
     this.ngxSmartModalService.setModalData(movie, 'update', true);
     this.ngxSmartModalService.getModal('update').open();
   }
-
-  checkAndUpdate() {
-    let movie: Movie = this.ngxSmartModalService.getModal('update').getData();
-    //this.validateService.validateRumTime(id)&&
+  
+  sendUpdate() {
+    let movie : Movie = this.ngxSmartModalService.getModal('update').getData();
     movie.Title = this.movieService.fixTitle(movie.Title);
     if (this.validateService.validateTitle(movie.Title, movie.id)) {
       this.movieService.updateMovie(movie);
       this.ngxSmartModalService.getModal('update').close();
     } else {
+      // להחליף לפופאפ
       alert('no validate');
     }
   }
 
-  removeMovie(movie: Movie) {
+  openRemove(movie: Movie) {
 
     this.ngxSmartModalService.setModalData(movie, 'delete', true);
     this.ngxSmartModalService.getModal('delete').open();
 
   }
 
-  remove() {
+  sendRemove() {
     let movie: Movie = this.ngxSmartModalService.getModal('delete').getData();
     this.movieService.removeMovie(movie);
     this.ngxSmartModalService.getModal('delete').close();

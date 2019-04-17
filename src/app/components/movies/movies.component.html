@@ -1,15 +1,15 @@
 <td *ngFor="let movie of movieService.getMovieList() ; let i=index">
   <div>{{movie.id}}</div>
   <div>{{movie.Title}}</div>
-  <div>{{movie.year}}</div>
-  <div>{{movie.runTime}}</div>
-  <div>{{movie.genre}}</div>
-  <div>{{movie.director}}</div>
-  <button (click)="updateMovie(movie)">update</button>
-  <button (click)="removeMovie(movie)">remove</button>
+  <div>{{movie.Year}}</div>
+  <div>{{movie.RunTime}}</div>
+  <div>{{movie.Genre}}</div>
+  <div>{{movie.Director}}</div>
+  <button (click)="openUpdate(movie)">update</button>
+  <button (click)="openRemove(movie)">remove</button>
 </td>
 
-<button (click)="add()">Open myModal for create</button>
+<button (click)="openCreate()">Open myModal for create</button>
 
 <ngx-smart-modal #create identifier="create">
   <h1>add movie</h1>
@@ -33,7 +33,7 @@
       <div class="form-group"><br>
         <label for="year" class="col-sm-2 col-form-label">Year</label>
         <div class="col-sm-5">
-          <input #yearCreate type="text" class="form-control" id="year" value="Year">
+          <input #yearCreate type="number" class="form-control" id="year" value="Year">
         </div>
       </div>
 
@@ -63,12 +63,11 @@
     <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
       <button style=" height: 50px;  width: 120px;" class="btn btn-default" (click)="create.close()">Close</button>
       <button style="    height: 50px; width: 120px;"
-        (click)="checkAndCreate( titleCreate.value , yearCreate.value , runTimeCreate.value , genreCreate.value , directorCreate.value)"
+        (click)="sendCreate( titleCreate.value , yearCreate.value , runTimeCreate.value , genreCreate.value , directorCreate.value)"
         class="btn btn-primary btn-lg active" role="button">Send</button>
     </div>
   </form>
 </ngx-smart-modal>
-
 
 <ngx-smart-modal #update identifier="update">
   <h1>update movie</h1>
@@ -95,7 +94,7 @@
         <div class="form-group"><br>
           <label for="year" class="col-sm-2 col-form-label">Year</label>
           <div class="col-sm-5">
-            <input #year type="text" class="form-control" id="year" value="{{update.getData().Year}}">
+            <input #year type="number" class="form-control" id="year" value="{{update.getData().Year}}">
           </div>
         </div>
 
@@ -123,10 +122,8 @@
       </div>
 
       <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
-        <button style=" height: 50px;  width: 120px;" class="btn btn-default" (click)="create.close()">Close</button>
-        <button style="    height: 50px; width: 120px;"
-          (click)="checkAndUpdate(title.value , year.value , runTime.value , genre.value , director.value)"
-          class="btn btn-primary btn-lg active" role="button">Send</button>
+        <button style="height: 50px; width: 120px;" class="btn btn-default" (click)="create.close()">Close</button>
+        <button style="height: 50px; width: 120px;" (click)="sendUpdate()" class="btn btn-primary btn-lg active" role="button">Send</button>
       </div>
     </form>
   </div>
@@ -139,7 +136,7 @@
   <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
     <button style=" height: 50px;  width: 120px;" class="btn btn-default" (click)="delete.close()">cancel</button>
     <button style="    height: 50px; width: 120px;"
-      (click)="remove()"
+      (click)="sendRemove()"
       class="btn btn-primary btn-lg active" role="button">OK</button>
   </div>
 </ngx-smart-modal>
