@@ -46,7 +46,7 @@ export class MovieService {
     let index = 0;
     this.movies.forEach(element => {
       if (element.id == movie.id) {
-        this.movies.splice(index);
+        this.movies.splice(index , 0);
         return;
       }
       index++;
@@ -54,7 +54,6 @@ export class MovieService {
   }
 
   updateMovie(movie: Movie) {
-
     this.movies.forEach(element => {
       if (element.id == movie.id) {
         element = movie;
@@ -76,9 +75,6 @@ export class MovieService {
     return title.replace(/[^a-zA-Z ]/g, "");
   }
 
-
-
-
   // לא בטוח שצריך את המתודה הזאת
   titleToSplit(title :string){
     // let endOfTitle : number  = title.search(/\d/);
@@ -87,7 +83,5 @@ export class MovieService {
     console.log(test)
 
   }
-
-
 
 }

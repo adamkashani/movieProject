@@ -6,11 +6,24 @@ import { Movie } from '../models/movie';
   providedIn: 'root'
 })
 export class ValidateService {
-
-
+  
+  
   constructor(private movieService: MovieService) { }
 
-
+  validateToCreate(movie: Movie): boolean {
+    if (this.validateTitle(movie.Title , movie.id)) {
+      if (movie.Genre != "") {
+        if (movie.Year != "") {
+          //אולי ניצתרך לשנות וולדציה מסטריג לתאריך
+          if (movie.Runtime != "") {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+  
 
   validateTitle(title: string , id : string ): boolean {
     if (title === "" ) {
@@ -33,18 +46,5 @@ export class ValidateService {
   }
 
 
-  validateToCreate(movie: Movie): boolean {
-    if (this.validateTitle(movie.Title , movie.id)) {
-      if (movie.Genre != "") {
-        if (movie.Year != "") {
-          //אולי ניצתרך לשנות וולדציה מסטריג לתאריך
-          if (movie.Runtime != "") {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
 
 }

@@ -1,15 +1,13 @@
-<td *ngFor="let movie of movieService.getMovieList() ; let i=index">
-  <div>{{movie.id}}</div>
-  <div>{{movie.Title}}</div>
-  <div>{{movie.Year}}</div>
-  <div>{{movie.RunTime}}</div>
-  <div>{{movie.Genre}}</div>
-  <div>{{movie.Director}}</div>
-  <button (click)="openUpdate(movie)">update</button>
-  <button (click)="openRemove(movie)">remove</button>
-</td>
+<h2 class="title">Movies List</h2>
 
-<button (click)="openCreate()">Add movie</button>
+<div class="contenr">
+  <button class="btn-add btn btn-primary" (click)="openCreate()">Add movie</button>
+</div>
+
+<div class="movies-list">
+  <app-movie *ngFor="let movie of movieService.getMovieList()" [movie]="movie" (eventRemove)="openRemove($event)"
+    (eventUpdate)="openUpdate($event)"></app-movie>
+</div>
 
 <ngx-smart-modal #create identifier="create">
   <h1>add movie</h1>
@@ -47,7 +45,12 @@
       <div class="form-group"><br>
         <label for="genre" class="col-sm-2 col-form-label">Genre</label>
         <div class="col-sm-5">
-          <input #genreCreate type="text" class="form-control" id="genre" value="Genre">
+          <select #genreCreate class="form-control">
+            <option value="COMEDY">COMEDY</option>
+            <option value="SHOW">SHOW</option>
+            <option value="GAME">GAME</option>
+          </select>
+          <!-- <input #genreCreate type="text" class="form-control" id="genre" value="Genre"> -->
         </div>
       </div>
 
@@ -61,17 +64,17 @@
     </div>
 
     <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
-      <button style=" height: 50px;  width: 120px;" class="btn btn-default" (click)="create.close()">Close</button>
-      <button style="    height: 50px; width: 120px;"
+      <button class="btn btn-default btn-md" (click)="create.close()">Close</button>
+      <button
         (click)="sendCreate( titleCreate.value , yearCreate.value , runTimeCreate.value , genreCreate.value , directorCreate.value)"
-        class="btn btn-primary btn-lg active" role="button">Send</button>
+        class="btn btn-primary btn-md active" role="button">Send</button>
     </div>
   </form>
 </ngx-smart-modal>
 
 <ngx-smart-modal #update identifier="update">
   <h1>update movie</h1>
-  {{update.getData() | json }}
+  <!-- {{update.getData() | json }} -->
   <div *ngIf="update.hasData()">
     <form>
       <div class="center-group">
@@ -79,51 +82,55 @@
           <label for="id" class="col-sm-2 col-form-label">id</label>
           <div class="col-sm-5">
             <input #id type="text" class="form-control" id="id" [disabled]="true"
-              value="{{this.movieService.autoIncrement}}">
+              value="{{update.getData().id}}">
           </div>
         </div>
         <br>
         <div class="form-group"><br>
           <label for="title" class="col-sm-2 col-form-label">title</label>
           <div class="col-sm-5">
-            <input #title type="text" class="form-control" id="title" [disabled]="false" [(ngModel)]="update.getData().Title" name="title"
-              value="{{update.getData().Title}}">
+            <input #title type="text" class="form-control" id="title" [disabled]="false"
+              [(ngModel)]="update.getData().Title" name="title" value="{{update.getData().Title}}">
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="year" class="col-sm-2 col-form-label">Year</label>
           <div class="col-sm-5">
-            <input #year type="number" class="form-control" id="year" value="{{update.getData().Year}}">
+            <input #year type="number" class="form-control" name="year" [(ngModel)]="update.getData().Year"
+              value="{{update.getData().Year}}">
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="runTime" class="col-sm-2 col-form-label">Runtime</label>
           <div class="col-sm-5">
-            <input #runTime type="text" class="form-control" id="runTime" value="{{update.getData().Runtime}}">
+            <input #runTime type="text" class="form-control" name="runTime" [(ngModel)]="update.getData().Runtime"
+              value="{{update.getData().Runtime}}">
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="genre" class="col-sm-2 col-form-label">Genre</label>
           <div class="col-sm-5">
-            <input #genre type="text" class="form-control" id="genre" value="{{update.getData().Genre}}">
+            <input #genre type="text" class="form-control" name="genre" [(ngModel)]="update.getData().Genre"
+              value="{{update.getData().Genre}}">
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="director" class="col-sm-2 col-form-label">Director</label>
           <div class="col-sm-5">
-            <input #director type="text" class="form-control" id="director" value="{{update.getData().Director}}">
+            <input #director type="text" class="form-control" name="director" [(ngModel)]="update.getData().Director"
+              value="{{update.getData().Director}}">
           </div>
         </div>
         <!-- and of center-group-->
       </div>
 
-      <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
-        <button style="height: 50px; width: 120px;" class="btn btn-default" (click)="create.close()">Close</button>
-        <button style="height: 50px; width: 120px;" (click)="sendUpdate()" class="btn btn-primary btn-lg active" role="button">Send</button>
+      <div>
+        <button class="btn btn-default" (click)="update.close()">Close</button>
+        <button (click)="sendUpdate()" class="btn btn-primary btn-md active" role="button">Send</button>
       </div>
     </form>
   </div>
@@ -135,8 +142,7 @@
 
   <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
     <button style=" height: 50px;  width: 120px;" class="btn btn-default" (click)="delete.close()">cancel</button>
-    <button style="    height: 50px; width: 120px;"
-      (click)="sendRemove()"
-      class="btn btn-primary btn-lg active" role="button">OK</button>
+    <button style="    height: 50px; width: 120px;" (click)="sendRemove()" class="btn btn-primary btn-md active"
+      role="button">OK</button>
   </div>
 </ngx-smart-modal>

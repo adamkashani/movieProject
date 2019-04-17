@@ -1,0 +1,45 @@
+.movie-item{
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #eee;
+    text-align: left;
+    border-radius: 5px;
+    box-shadow: 0 0 3px;
+    width: 250px;
+    .movie-id{
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .movie-title{
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+      margin: 10px 0;
+    }
+    .actions{
+      margin-top: 15px;
+      text-align: right;
+      
+.btn{
+  margin: 5px;
+  border: 1px solid #9ecdd6;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 5px;
+  &:hover{
+    opacity: 0.85;
+  }
+}
+
+.btn-remove{
+background-color: #f1c0c0;
+}
+
+.btn-update{
+  background-color: #9e9ef5;
+}
+    }
+}
+

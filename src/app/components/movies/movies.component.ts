@@ -11,7 +11,6 @@ import { ValidateService } from 'src/app/services/validate.service';
 })
 export class MoviesComponent implements OnInit {
 
-  movie: Movie = null;
 
   constructor(private validateService: ValidateService,
     private movieService: MovieService,
@@ -38,14 +37,14 @@ export class MoviesComponent implements OnInit {
       alert('no validate')
     }
   }
-  
+
   openUpdate(movie: Movie) {
     this.ngxSmartModalService.setModalData(movie, 'update', true);
     this.ngxSmartModalService.getModal('update').open();
   }
-  
+
   sendUpdate() {
-    let movie : Movie = this.ngxSmartModalService.getModal('update').getData();
+    let movie: Movie = this.ngxSmartModalService.getModal('update').getData();
     movie.Title = this.movieService.fixTitle(movie.Title);
     if (this.validateService.validateTitle(movie.Title, movie.id)) {
       this.movieService.updateMovie(movie);
@@ -66,8 +65,5 @@ export class MoviesComponent implements OnInit {
     this.movieService.removeMovie(movie);
     this.ngxSmartModalService.getModal('delete').close();
   }
-
-
-
 
 }
