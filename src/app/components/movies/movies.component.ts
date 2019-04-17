@@ -18,6 +18,7 @@ export class MoviesComponent implements OnInit {
     public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
+
   }
 
   openCreate() {
