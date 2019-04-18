@@ -1,12 +1,12 @@
 <div class="movie-item">
   <strong class="movie-id">ID: {{movie.id}}</strong>
-  <div class="movie-title">{{movie.Title}}</div>
+  <div class="movie-title">{{movie.Title | title }}</div>
   <div>Year: {{movie.Year}}</div>
   <div>Runtime: {{movie.Runtime}}</div>
   <div>Genre: {{movie.Genre}}</div>
   <div>Director: {{movie.Director}}</div>
   <div class="actions">
-    <button class="btn btn-update" (click)="update()">Update</button>
+    <button class="btn btn-update" (click)="update()">Edit</button>
     <button class="btn btn-remove" (click)="remove()">Remove</button>
   </div>
 </div>

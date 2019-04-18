@@ -1,19 +1,30 @@
-.movies-list{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content:space-around;
-    margin: 0 auto;
+.movies-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0 auto;
 }
 
-.title{
-    text-align: center;
+.title {
+  text-align: center;
 }
 
-.contenr{
-    text-align: center;
+.contenr {
+  text-align: center;
 }
-.btn-add{
-    &:hover{
-        opacity: 0.85;
-      }
+.btn-add {
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.btn-continer {
+  text-align: center;
+}
+
+.div-validate {
+  border: 2px solid rgb(221, 96, 134);
+  display: inline-block;
+  width: YOURWIDTH;
+  text-align: justify;
 }

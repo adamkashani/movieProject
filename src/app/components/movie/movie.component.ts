@@ -23,7 +23,7 @@ export class MovieComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.movie);
+    
   }
 
 }
