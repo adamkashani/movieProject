@@ -61,7 +61,6 @@ export class MovieService {
     }
   }
 
-
   fixTitle(title: string): string {
     title = this.clearTitle(title);
     const splitStr: Array<string> = title.toLowerCase().split(' ');

@@ -13,14 +13,11 @@ export class ValidateService {
 
   constructor(private movieService: MovieService) { }
 
-
   ToDefaultValues() {
     this.isTitleExists = false;
     this.dataIsValidate = true;
     this.isTitleIsEmpty = false;
-
   }
-
 
   validateMovie(movie: Movie): boolean {
 

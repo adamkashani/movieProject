@@ -28,14 +28,12 @@ export class MoviesComponent implements OnInit {
     title = this.movieService.fixTitle(title);
     let movie = new Movie(this.movieService.autoIncrement.toString(), title, year, runTime, genre, director);
     if (this.validateService.validateTitle(movie.Title, movie.id)) {
-      // if (this.validateService.validateMovie(movie)) {
       this.movieService.addMovie(movie);
       this.movieService.autoIncrement++;
       this.ngxSmartModalService.getModal('create').close();
       return;
     }
   }
-  // }
 
   openUpdate(movie: Movie) {
     this.validateService.ToDefaultValues();
