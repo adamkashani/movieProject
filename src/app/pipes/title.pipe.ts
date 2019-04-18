@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ValidateService } from '../services/validate.service';
 import { MovieService } from '../services/movie.service';
 
 @Pipe({
@@ -7,11 +6,10 @@ import { MovieService } from '../services/movie.service';
 })
 export class TitlePipe implements PipeTransform {
 
-  constructor(private movieService : MovieService){
-
+  constructor(private movieService: MovieService) {
   }
 
-  transform(title: string, args?: any): string {
+  transform(title: string): string {
     return this.movieService.fixTitle(title);
   }
 

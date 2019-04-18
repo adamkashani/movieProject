@@ -1,7 +1,7 @@
 <h2 class="title">Movies List</h2>
 
-<div class="contenr">
-  <button class="btn-add btn btn-primary" (click)="openCreate()">Add movie</button>
+<div class="container">
+  <button class="btn btn-secondary btn-add" (click)="openCreate()">Add movie</button>
   <!-- <button class="btn-add btn btn-primary" (click)="openSearch()">Search movie</button> -->
 </div>
 
@@ -11,9 +11,10 @@
 </div>
 
 <ngx-smart-modal #create identifier="create">
-  <h1>add movie</h1>
+  <h1>Add movie</h1>
   <form>
-    <div *ngIf="validateService.isTitleExists" class="div-validate"><strong> The title all ready exists </strong></div>
+    <div *ngIf="validateService.isTitleExists" class="div-validate"><strong> The title already exists </strong></div>
+    <div *ngIf="validateService.isTitleIsEmpty" class="div-validate"><strong> The title cen not by empty </strong></div>
     <div class="center-group">
       <div class="form-group">
         <label for="id" class="col-sm-2 col-form-label">id</label>
@@ -79,10 +80,10 @@
   <h1>update movie</h1>
   <div *ngIf="update.hasData()">
     <form>
-      <div *ngIf="validateService.isTitleExists" class="div-validate"><strong> The title all ready exists </strong>
-      </div>
-      <div *ngIf="!validateService.dataIsValidate" class="div-validate"><strong> All filds can not be empty </strong>
-      </div>
+      <div *ngIf="validateService.isTitleExists" class="div-validate"><strong> The title already exists </strong></div>
+      <div *ngIf="!validateService.dataIsValidate" class="div-validate"><strong> All filds can not be empty </strong></div>
+      <div *ngIf="validateService.isTitleIsEmpty" class="div-validate"><strong> The title cen not by empty </strong></div>
+      
       <div class="center-group">
         <div class="form-group">
           <label for="id" class="col-sm-2 col-form-label">id</label>
@@ -140,11 +141,11 @@
 
 
 <ngx-smart-modal #delete identifier="delete">
-  <h3>Are you sure you want to delete?</h3>
+  <h3 style="text-align: center">Are you sure you want to delete?</h3>
 
   <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
-    <button style=" height: 50px;  width: 120px;" class="btn btn-default" (click)="delete.close()">cancel</button>
-    <button style="    height: 50px; width: 120px;" (click)="sendRemove()" class="btn btn-primary btn-md active"
+    <button style=" height: 40px;  width: 100px;" class="btn btn-default" (click)="delete.close()">cancel</button>
+    <button style="    height: 40px; width: 100px;" (click)="sendRemove()" class="btn btn-primary btn-md active"
       role="button">OK</button>
   </div>
 </ngx-smart-modal>

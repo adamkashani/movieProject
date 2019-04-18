@@ -9,6 +9,7 @@ export class ValidateService {
 
   isTitleExists: boolean = false;
   dataIsValidate: boolean = true;
+  isTitleIsEmpty: boolean = false;
 
   constructor(private movieService: MovieService) { }
 
@@ -16,16 +17,21 @@ export class ValidateService {
   ToDefaultValues() {
     this.isTitleExists = false;
     this.dataIsValidate = true;
+    this.isTitleIsEmpty = false;
+
   }
 
 
   validateMovie(movie: Movie): boolean {
-    if (movie.Genre !== '') {
-      if (movie.Year !== '') {
-        if (movie.Runtime !== '') {
-          if (movie.Director !== '') {
-            this.dataIsValidate = true;
-            return true;
+
+    if (this.checkTitle(movie.Title)) {
+      if (movie.Genre !== '') {
+        if (movie.Year !== '') {
+          if (movie.Runtime !== '') {
+            if (movie.Director !== '') {
+              this.dataIsValidate = true;
+              return true;
+            }
           }
         }
       }
@@ -35,16 +41,14 @@ export class ValidateService {
   }
 
   validateTitle(title: string, id: string): boolean {
-    if (title === '') {
-      return false;
-    }
-    if (this.ifTitleExists(title, id)) {
-      this.isTitleExists = true;
-      return false;
-    } else {
-      this.isTitleExists = false;
-      return true;
-
+    if (this.checkTitle(title)) {
+      if (this.ifTitleExists(title, id)) {
+        this.isTitleExists = true;
+        return false;
+      } else {
+        this.isTitleExists = false;
+        return true;
+      }
     }
   }
 
@@ -55,6 +59,15 @@ export class ValidateService {
         return true;
       }
     }
+    return false;
+  }
+
+  checkTitle(title: string) {
+    if (title !== '') {
+      this.isTitleIsEmpty = false;
+      return true;
+    }
+    this.isTitleIsEmpty = true;
     return false;
   }
 
