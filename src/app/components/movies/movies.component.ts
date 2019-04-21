@@ -11,8 +11,8 @@ import { ValidateService } from 'src/app/services/validate.service';
 })
 export class MoviesComponent implements OnInit {
 
-  constructor(private validateService: ValidateService,
-    private movieService: MovieService,
+  constructor(public validateService: ValidateService,
+    public movieService: MovieService,
     public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {

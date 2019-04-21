@@ -5,145 +5,159 @@
 </div>
 
 <div class="movies-list">
-  <app-movie *ngFor="let movie of movieService.getMovieList()" [movie]="movie" (eventRemove)="openRemove($event)"
-    (eventUpdate)="openUpdate($event)"></app-movie>
+  <app-movie class="app-movie" *ngFor="let movie of movieService.getMovieList()" [movie]="movie"
+    (eventRemove)="openRemove($event)" (eventUpdate)="openUpdate($event)"></app-movie>
 </div>
 
-<ngx-smart-modal #create identifier="create">
-  <h1>Add movie</h1>
-  <form>
-    <div *ngIf="validateService.isTitleExists" class="div-validate"><strong> The title already exists </strong></div>
-    <div *ngIf="validateService.isTitleIsEmpty" class="div-validate"><strong> The title cen not by empty </strong></div>
-    <div class="center-group">
-      <div class="form-group">
-        <label for="id" class="col-sm-2 col-form-label">id</label>
-        <div class="col-sm-5">
-          <input #id type="text" class="form-control" id="id" [disabled]="true"
-            value="{{this.movieService.autoIncrement}}">
-        </div>
-      </div>
-      <br>
-      <div class="form-group"><br>
-        <label for="title" class="col-sm-2 col-form-label">title</label>
-        <div class="col-sm-5">
-          <input #titleCreate type="text" class="form-control" id="title" [disabled]="false" value="title">
-        </div>
-      </div>
-
-      <div class="form-group"><br>
-        <label for="year" class="col-sm-2 col-form-label">Year</label>
-        <div class="col-sm-5">
-          <input #yearCreate type="number" class="form-control" id="year" value="Year">
-        </div>
-      </div>
-
-      <div class="form-group"><br>
-        <label for="runTime" class="col-sm-2 col-form-label">Runtime</label>
-        <div class="col-sm-5">
-          <input #runTimeCreate type="text" class="form-control" id="runTime" value="Runtime">
-        </div>
-      </div>
-
-      <div class="form-group"><br>
-        <label for="genre" class="col-sm-2 col-form-label">Genre</label>
-        <div class="col-sm-5">
-          <select #genreCreate class="form-control">
-            <option value="Drama">Drama</option>
-            <option value="Fantasy">Fantasy</option>
-            <option value="Action">Action</option>
-            <option value="Adventure">Adventure</option>
-            <option value="Romance">Romance</option>
-            <option value="Family">Family</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group"><br>
-        <label for="director" class="col-sm-2 col-form-label">Director</label>
-        <div class="col-sm-5">
-          <input #directorCreate type="text" class="form-control" id="director" value="Director">
-        </div>
-      </div>
-    </div>
-
-    <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
-      <button class="btn btn-default btn-md" (click)="create.close()">Close</button>
-      <button
-        (click)="sendCreate( titleCreate.value , yearCreate.value , runTimeCreate.value , genreCreate.value , directorCreate.value)"
-        class="btn btn-primary btn-md active" role="button">Send</button>
-    </div>
-  </form>
-</ngx-smart-modal>
-
-<ngx-smart-modal #update identifier="update">
-  <h1>update movie</h1>
-  <div *ngIf="update.hasData()">
+<ng-container>
+  <ngx-smart-modal #create identifier="create">
+    <h1 class="title">Add movie</h1>
     <form>
       <div *ngIf="validateService.isTitleExists" class="div-validate"><strong> The title already exists </strong></div>
-      <div *ngIf="!validateService.dataIsValidate" class="div-validate"><strong> All filds can not be empty </strong></div>
-      <div *ngIf="validateService.isTitleIsEmpty" class="div-validate"><strong> The title cen not by empty </strong></div>
-      
+      <div *ngIf="validateService.isTitleIsEmpty" class="div-validate"><strong> The title can't be empty </strong>
+      </div>
       <div class="center-group">
         <div class="form-group">
           <label for="id" class="col-sm-2 col-form-label">id</label>
           <div class="col-sm-5">
-            <input #id type="text" class="form-control" id="id" [disabled]="true" value="{{update.getData().id}}">
+            <input #id type="text" class="form-control" id="id" [disabled]="true"
+              value="{{this.movieService.autoIncrement}}">
           </div>
         </div>
         <br>
         <div class="form-group"><br>
           <label for="title" class="col-sm-2 col-form-label">title</label>
           <div class="col-sm-5">
-            <input #title type="text" class="form-control" id="title" [disabled]="false"
-              value="{{update.getData().Title}}">
+            <input #titleCreate type="text" class="form-control" id="title" [disabled]="false" value="">
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="year" class="col-sm-2 col-form-label">Year</label>
           <div class="col-sm-5">
-            <input #year type="number" class="form-control" value="{{update.getData().Year}}">
+            <input #yearCreate type="number" class="form-control" id="year" value="">
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="runTime" class="col-sm-2 col-form-label">Runtime</label>
           <div class="col-sm-5">
-            <input #runTime type="text" class="form-control" value="{{update.getData().Runtime}}">
+            <input #runTimeCreate type="text" class="form-control" id="runTime" value="">
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="genre" class="col-sm-2 col-form-label">Genre</label>
           <div class="col-sm-5">
-            <input #genre type="text" class="form-control" value="{{update.getData().Genre}}">
+            <select #genreCreate class="form-control">
+              <option value="Drama">Drama</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Action">Action</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Romance">Romance</option>
+              <option value="Family">Family</option>
+            </select>
           </div>
         </div>
 
         <div class="form-group"><br>
           <label for="director" class="col-sm-2 col-form-label">Director</label>
           <div class="col-sm-5">
-            <input #director type="text" class="form-control" value="{{update.getData().Director}}">
+            <input #directorCreate type="text" class="form-control" id="director" value="">
           </div>
         </div>
       </div>
 
-      <div class="btn-continer">
-        <button class="btn btn-default" (click)="update.close()">Close</button>
+      <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
+        <button class="btn btn-default btn-md" (click)="create.close()">Close</button>
         <button
-          (click)="sendUpdate(id.value , title.value , year.value ,  runTime.value , genre.value , director.value)"
+          (click)="sendCreate( titleCreate.value , yearCreate.value , runTimeCreate.value , genreCreate.value , directorCreate.value)"
           class="btn btn-primary btn-md active" role="button">Send</button>
       </div>
     </form>
-  </div>
-</ngx-smart-modal>
+  </ngx-smart-modal>
 
-<ngx-smart-modal #delete identifier="delete">
-  <h3 style="text-align: center">Are you sure you want to delete?</h3>
+  <ngx-smart-modal #update identifier="update">
+    <h1 class="title">update movie</h1>
+    <div *ngIf="update.hasData()">
+      <form>
+        <div *ngIf="validateService.isTitleExists" class="div-validate"><strong> The title already exists </strong>
+        </div>
+        <div *ngIf="!validateService.dataIsValidate" class="div-validate"><strong>All fields cannot be empty</strong>
+        </div>
+        <div *ngIf="validateService.isTitleIsEmpty" class="div-validate"><strong> The title can't be empty </strong>
+        </div>
 
-  <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
-    <button style=" height: 40px;  width: 100px;" class="btn btn-default" (click)="delete.close()">cancel</button>
-    <button style="    height: 40px; width: 100px;" (click)="sendRemove()" class="btn btn-primary btn-md active"
-      role="button">OK</button>
-  </div>
-</ngx-smart-modal>
+        <div class="center-group">
+          <div class="form-group">
+            <label for="id" class="col-sm-2 col-form-label">id</label>
+            <div class="col-sm-5">
+              <input #id type="text" class="form-control" id="id" [disabled]="true" value="{{update.getData().id}}">
+            </div>
+          </div>
+          <br>
+          <div class="form-group"><br>
+            <label for="title" class="col-sm-2 col-form-label">title</label>
+            <div class="col-sm-5">
+              <input #title type="text" class="form-control" id="title" [disabled]="false"
+                value="{{update.getData().Title}}">
+            </div>
+          </div>
+
+          <div class="form-group"><br>
+            <label for="year" class="col-sm-2 col-form-label">Year</label>
+            <div class="col-sm-5">
+              <input #year type="number" class="form-control" value="{{update.getData().Year}}">
+            </div>
+          </div>
+
+          <div class="form-group"><br>
+            <label for="runTime" class="col-sm-2 col-form-label">Runtime</label>
+            <div class="col-sm-5">
+              <input #runTime type="text" class="form-control" value="{{update.getData().Runtime}}">
+            </div>
+          </div>
+
+          <div class="form-group"><br>
+            <label for="genre" class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-5">
+              <select #genre class="form-control">
+                <option value="{{update.getData().Genre}}">{{update.getData().Genre}}</option>
+                <option value="Drama">Drama</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Romance">Romance</option>
+                <option value="Family">Family</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group"><br>
+            <label for="director" class="col-sm-2 col-form-label">Director</label>
+            <div class="col-sm-5">
+              <input #director type="text" class="form-control" value="{{update.getData().Director}}">
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-continer">
+          <button class="btn btn-default" (click)="update.close()">Close</button>
+          <button
+            (click)="sendUpdate(id.value , title.value , year.value ,  runTime.value , genre.value , director.value)"
+            class="btn btn-primary btn-md active" role="button">Send</button>
+        </div>
+      </form>
+    </div>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal #delete identifier="delete">
+    <h3 style="text-align: center">Are you sure you want to delete?</h3>
+
+    <div style=" height: 90px;  display: flex;  align-items: center; justify-content: space-evenly;">
+      <button class="btn btn-default btn-delete" (click)="delete.close()">cancel</button>
+      <button (click)="sendRemove()" class="btn btn-primary btn-delete"
+        role="button">Yes</button>
+    </div>
+  </ngx-smart-modal>
+</ng-container>

@@ -22,6 +22,11 @@
   text-align: center;
 }
 
+.btn-delete {
+  height: 40px;
+  width: 100px;
+}
+
 .div-validate {
   border: 2px solid rgb(221, 96, 134);
   display: inline-block;
@@ -29,6 +34,10 @@
   text-align: justify;
 }
 
-.btn-add{
+.btn-add {
   margin-bottom: 20px;
+}
+
+.app-movie {
+  margin: 15px;
 }

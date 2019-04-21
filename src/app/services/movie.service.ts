@@ -9,9 +9,10 @@ export class MovieService {
 
   moviesTitle: Array<string> = [
     'ghost rider', 'captain marvel', 'dumbo', 'Slumdog Millionaire', 'Thor', 'Troy',
-    'Pinocchio', 'Avengers', 'hellboy', 'Daddy\'s Home', 'Law Abiding Citizen' , 'Black Panther'];
+    'Pinocchio', 'Avengers', 'hellboy', 'Daddy\'s Home', 'Law Abiding Citizen',
+    'The Aviator', 'Limitless', '12 Strong', 'Black Panther'];
 
-  movieUrl: string = 'http://www.omdbapi.com/';
+  movieUrl: string = 'https://www.omdbapi.com/';
   key: string = 'apikey=34337168';
   autoIncrement: number = 1;
   movies: Movie[] = new Array;
